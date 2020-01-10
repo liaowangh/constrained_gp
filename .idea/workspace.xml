@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ee35febc-92dd-486b-917d-31c77aa8bfaf" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="constraineded_gp" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1Ssc49TwWAA5JkW9xX3JebwKrx8" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
+  </component>
+  <component name="RunManager" selected="Python.constrained_gp">
+    <configuration name="constrained_gp" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="constraineded_gp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/constrained_gp.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="filter (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="constraineded_gp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../TA/doxygen/filter" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../TA/doxygen/filter/filter.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="filter" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="constraineded_gp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../TA/filter script" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../TA/filter script/filter.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="new_problem" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="constraineded_gp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../TA/NPDECODES-master/scripts" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../TA/NPDECODES-master/scripts/new_problem.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="constraineded_gp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.constrained_gp" />
+        <item itemvalue="Python.new_problem" />
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.filter" />
+        <item itemvalue="Python.filter (1)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ee35febc-92dd-486b-917d-31c77aa8bfaf" name="Default Changelist" comment="" />
+      <created>1572355549541</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1572355549541</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="691" y="132" key="#xdebugger.evaluate" timestamp="1575732895992">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="691" y="132" key="#xdebugger.evaluate/0.23.1280.777@0.23.1280.777" timestamp="1575732895992" />
+    <state width="1259" height="198" key="GridCell.Tab.0.bottom" timestamp="1578693421043">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state width="1259" height="165" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1577993553826" />
+    <state width="1259" height="198" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1578693421043" />
+    <state width="1259" height="198" key="GridCell.Tab.0.center" timestamp="1578693421042">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state width="1259" height="165" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1577993553824" />
+    <state width="1259" height="198" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1578693421042" />
+    <state width="1259" height="198" key="GridCell.Tab.0.left" timestamp="1578693421041">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state width="1259" height="165" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1577993553823" />
+    <state width="1259" height="198" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1578693421041" />
+    <state width="1259" height="198" key="GridCell.Tab.0.right" timestamp="1578693421042">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state width="1259" height="165" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1577993553825" />
+    <state width="1259" height="198" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1578693421042" />
+    <state width="1259" height="278" key="GridCell.Tab.1.bottom" timestamp="1578580352522">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state width="1259" height="178" key="GridCell.Tab.1.bottom/0.0.1280.800@0.0.1280.800" timestamp="1577993203040" />
+    <state width="1259" height="278" key="GridCell.Tab.1.bottom/0.23.1280.777@0.23.1280.777" timestamp="1578580352522" />
+    <state width="1259" height="278" key="GridCell.Tab.1.center" timestamp="1578580352522">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state width="1259" height="178" key="GridCell.Tab.1.center/0.0.1280.800@0.0.1280.800" timestamp="1577993203038" />
+    <state width="1259" height="278" key="GridCell.Tab.1.center/0.23.1280.777@0.23.1280.777" timestamp="1578580352522" />
+    <state width="1259" height="278" key="GridCell.Tab.1.left" timestamp="1578580352522">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state width="1259" height="178" key="GridCell.Tab.1.left/0.0.1280.800@0.0.1280.800" timestamp="1577993203037" />
+    <state width="1259" height="278" key="GridCell.Tab.1.left/0.23.1280.777@0.23.1280.777" timestamp="1578580352522" />
+    <state width="1259" height="278" key="GridCell.Tab.1.right" timestamp="1578580352522">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state width="1259" height="178" key="GridCell.Tab.1.right/0.0.1280.800@0.0.1280.800" timestamp="1577993203039" />
+    <state width="1259" height="278" key="GridCell.Tab.1.right/0.23.1280.777@0.23.1280.777" timestamp="1578580352522" />
+    <state x="111" y="78" key="SettingsEditor" timestamp="1578692140620">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="111" y="78" key="SettingsEditor/0.23.1280.777@0.23.1280.777" timestamp="1578692140620" />
+    <state x="305" y="143" width="670" height="657" key="search.everywhere.popup" timestamp="1578146561577">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1577992507836" />
+    <state x="305" y="143" width="670" height="657" key="search.everywhere.popup/0.23.1280.777@0.23.1280.777" timestamp="1578146561577" />
+  </component>
+</project>
