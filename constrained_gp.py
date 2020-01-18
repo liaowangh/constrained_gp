@@ -1,15 +1,16 @@
-import numpy as np
 import cvxpy as cp
 import math
 import matplotlib.pyplot as plt
+import numpy as np
 import scipy
-from scipy.stats import norm
 import scipy.stats
+from scipy.stats import norm
 
+from GibbsSampler import gibbs
 from HmcSampler import tmg
 from MHSampler import mh
-from rtmg import py_rtmg
 from RSM import rsm
+from rtmg import py_rtmg
 
 
 class ConstrainedGP:
@@ -65,9 +66,9 @@ class ConstrainedGP:
         """
         m = self.m
         constraints = self.constraints
-        increasing = constraint['increasing']
-        convex = constraint['convex']
-        bounded = len(constraint['bounded']) > 0
+        increasing = constraints['increasing']
+        convex = constraints['convex']
+        bounded = len(constraints['bounded']) > 0
         l = None
         Lambda = None
         u = None
@@ -234,8 +235,8 @@ class ConstrainedGP:
         Gamma = self.covariance()
         if alpha is not None:
             Gamma = Gamma + alpha * np.eye(self.m)
-        mu = Gamma @ Phi.T @ scipy.linalg.solve(Phi @ Gamma @ Phi.T, y, assume_a='sym')
-        Sigma = Gamma - Gamma @ Phi.T @ scipy.linalg.solve(Phi @ Gamma @ Phi.T, Phi, assume_a='sym') @ Gamma
+        mu = Gamma @ Phi.T @ np.linalg.solve(Phi @ Gamma @ Phi.T, y)
+        Sigma = Gamma - Gamma @ Phi.T @ np.linalg.solve(Phi @ Gamma @ Phi.T, Phi) @ Gamma
         if alpha is not None:
             Sigma = Sigma + alpha * np.eye(self.m)
 
@@ -263,7 +264,7 @@ class ConstrainedGP:
             prob = cp.Problem(obj, constraints)
             # print("Problem is DCP: ", prob.is_dcp())
             prob.solve()
-            print("status:", prob.status)
+            # print("status:", prob.status)
             if prob.status != "optimal":
                 raise ValueError('cannot compute the mode')
             mode = xi.value
@@ -321,7 +322,7 @@ class ConstrainedGP:
         :param alpha:   coefficient of diagonal shift
         :param verbose:
         :param method:  sampling method. 'HMC' : Hamiltonian Monte Carlo. 'RSM' : reject sampling method.
-                        'ET' : minimax exponential tilting. 'Gibbs' : Gibbs sampling. 'MH' : Metropolis-Hastings
+                        'Gibbs' : Gibbs sampling. 'MH' : Metropolis-Hastings
         :return: (n,m) each row is a sample
         """
         mu, Sigma, initial = self.mode(x, y, alpha=alpha)
@@ -344,26 +345,33 @@ class ConstrainedGP:
             eta[eta > u] = u[eta > u] - 1e-8
 
             if method == 'HMC':
+                samples = tmg(n, Lambda@mu, R, eta, f, g, burn_in=burn_in, verbose=verbose)
+            elif method == 'RHMC':
                 samples = py_rtmg(n, Lambda@mu, R, eta, f, g, burn_in=burn_in, verbose=verbose)
             elif method == 'RSM':
                 samples = rsm(n, Lambda@mu, R, f, g, verbose=verbose)
             elif method == 'MH':
-                samples = mh(n, Lambda@mu, R, eta, f, g, 1, burn_in=burn_in)
+                samples = mh(n, Lambda@mu, R, eta, f, g, 0.1, burn_in=burn_in)
+            elif method == 'Gibbs':
+                samples = gibbs(n, Lambda@mu, R, eta, f, g, burn_in=burn_in)
             else:
-                raise ValueError(method + " is not supported.")
-            samples = scipy.linalg.solve(Lambda.T @ Lambda, Lambda.T) @ samples.T
+                raise ValueError("Not supported method.")
+            samples = np.linalg.solve(Lambda.T @ Lambda, Lambda.T) @ samples.T
             samples = samples.T
         else:
             # we have analytic formulation of the posterior distribution
             if method == 'HMC':
-                # samples = tmg(n, Sigma, mu, initial, None, None, burn_in=burn_in)
+                samples = tmg(n, mu, Sigma, initial, None, None, burn_in=burn_in)
+            elif method == "RHMC":
                 samples = py_rtmg(n, mu, Sigma, initial, None, None, burn_in=burn_in)
             elif method == 'RSM':
                 samples = rsm(n, mu, Sigma, None, None, verbose=verbose)
             elif method == 'MH':
-                samples = mh(n, mu, Sigma, initial, None, None, 1, burn_in=burn_in)
+                samples = mh(n, mu, Sigma, initial, None, None, 0.1, burn_in=burn_in)
+            elif method == 'Gibbs':
+                samples = gibbs(n, mu, Sigma, initial, None, None, burn_in=burn_in)
             else:
-                raise ValueError(method + " is not supported.")
+                raise ValueError("Not supported method.")
 
         # print(samples)
         self.samples = samples
@@ -419,7 +427,7 @@ def condition_num(const, x, alpha=None):
             Gamma = Gamma + alpha * np.eye(len(Gamma))
         Phi = Gp.interpolation_constraints(x)
         l, Lambda, u = Gp.inequality_constraints()
-        Sigma = Gamma - Gamma @ Phi.T @ scipy.linalg.solve(Phi@Gamma@Phi.T, Phi, assume_a='sym') @ Gamma
+        Sigma = Gamma - Gamma @ Phi.T @ np.linalg.solve(Phi@Gamma@Phi.T, Phi, assume_a='sym') @ Gamma
         if alpha is not None:
             Sigma = Sigma + alpha * np.eye(len(Sigma))
 
@@ -427,7 +435,7 @@ def condition_num(const, x, alpha=None):
 
         if alpha is not None:
             R = R + alpha * np.eye(len(R))
-        Rinv = scipy.linalg.inv(R)
+        Rinv = np.linalg.inv(R)
 
         cond_Gamma = np.linalg.cond(Gamma)
         rank_Gamma = np.linalg.matrix_rank(Gamma)
@@ -503,11 +511,11 @@ def title(constraint):
 
 if __name__ == "__main__":
     # plot_mode(100)
-    constraint = {'increasing': True, 'bounded': [], 'convex': False}
-    sampling_method = 'RSM'
+    constraint = {'increasing': True, 'bounded': [0, 1], 'convex': False}
+    sampling_method = 'Gibbs'
     # condition_num(constraint, np.array([0.25, 0.5, 0.75]), 0.0000001)
 
-    Gp = ConstrainedGP(m=30, constraints=constraint)
+    Gp = ConstrainedGP(30, constraints=constraint)
     rv = norm()
 
     def f(x):
@@ -517,8 +525,8 @@ if __name__ == "__main__":
     #     return x*x
     # x_train = np.array([0.1, 0.5, 0.9])
     y_train = f(x_train)
-    samples = Gp.fit_gp(x_train, y_train, n=500, burn_in=100, alpha=0.0000001,
-                        verbose=True, method=sampling_method)
+    samples = Gp.fit_gp(x_train, y_train, n=100, burn_in=100, alpha=0.0000001,
+                        verbose=False, method=sampling_method)
 
     t = np.arange(0, 1 + 0.01, 0.01)
     y_true = f(t)
