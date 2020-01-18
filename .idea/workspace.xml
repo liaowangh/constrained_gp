@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ee35febc-92dd-486b-917d-31c77aa8bfaf" name="Default Changelist" comment="" />
+    <list default="true" id="ee35febc-92dd-486b-917d-31c77aa8bfaf" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,7 +19,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1Ssc49TwWAA5JkW9xX3JebwKrx8" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -25,9 +31,31 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RunManager" selected="Python.constrained_gp">
+    <configuration name="HmcSampler" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="constraineded_gp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/HmcSampler.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="constrained_gp" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="constraineded_gp" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -41,27 +69,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/constrained_gp.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="filter (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="constraineded_gp" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../TA/doxygen/filter" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../TA/doxygen/filter/filter.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -136,10 +143,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.constrained_gp" />
+        <item itemvalue="Python.HmcSampler" />
         <item itemvalue="Python.new_problem" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.filter" />
-        <item itemvalue="Python.filter (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -173,54 +180,62 @@
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="691" y="132" key="#xdebugger.evaluate/0.23.1280.777@0.23.1280.777" timestamp="1575732895992" />
-    <state width="1259" height="198" key="GridCell.Tab.0.bottom" timestamp="1578693421043">
+    <state x="263" y="23" key="CommitChangelistDialog2" timestamp="1579099124821">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="263" y="23" key="CommitChangelistDialog2/0.23.1280.777@0.23.1280.777" timestamp="1579099124821" />
+    <state width="1259" height="157" key="GridCell.Tab.0.bottom" timestamp="1579384931791">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="1259" height="165" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1577993553826" />
-    <state width="1259" height="198" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1578693421043" />
-    <state width="1259" height="198" key="GridCell.Tab.0.center" timestamp="1578693421042">
+    <state width="1259" height="157" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1579384931791" />
+    <state width="1259" height="157" key="GridCell.Tab.0.center" timestamp="1579384931790">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="1259" height="165" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1577993553824" />
-    <state width="1259" height="198" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1578693421042" />
-    <state width="1259" height="198" key="GridCell.Tab.0.left" timestamp="1578693421041">
+    <state width="1259" height="157" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1579384931790" />
+    <state width="1259" height="157" key="GridCell.Tab.0.left" timestamp="1579384931790">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="1259" height="165" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1577993553823" />
-    <state width="1259" height="198" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1578693421041" />
-    <state width="1259" height="198" key="GridCell.Tab.0.right" timestamp="1578693421042">
+    <state width="1259" height="157" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1579384931790" />
+    <state width="1259" height="157" key="GridCell.Tab.0.right" timestamp="1579384931790">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="1259" height="165" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1577993553825" />
-    <state width="1259" height="198" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1578693421042" />
-    <state width="1259" height="278" key="GridCell.Tab.1.bottom" timestamp="1578580352522">
+    <state width="1259" height="157" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1579384931790" />
+    <state width="1259" height="238" key="GridCell.Tab.1.bottom" timestamp="1579378671338">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="1259" height="178" key="GridCell.Tab.1.bottom/0.0.1280.800@0.0.1280.800" timestamp="1577993203040" />
-    <state width="1259" height="278" key="GridCell.Tab.1.bottom/0.23.1280.777@0.23.1280.777" timestamp="1578580352522" />
-    <state width="1259" height="278" key="GridCell.Tab.1.center" timestamp="1578580352522">
+    <state width="1259" height="238" key="GridCell.Tab.1.bottom/0.23.1280.777@0.23.1280.777" timestamp="1579378671338" />
+    <state width="1259" height="238" key="GridCell.Tab.1.center" timestamp="1579378671337">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="1259" height="178" key="GridCell.Tab.1.center/0.0.1280.800@0.0.1280.800" timestamp="1577993203038" />
-    <state width="1259" height="278" key="GridCell.Tab.1.center/0.23.1280.777@0.23.1280.777" timestamp="1578580352522" />
-    <state width="1259" height="278" key="GridCell.Tab.1.left" timestamp="1578580352522">
+    <state width="1259" height="238" key="GridCell.Tab.1.center/0.23.1280.777@0.23.1280.777" timestamp="1579378671337" />
+    <state width="1259" height="238" key="GridCell.Tab.1.left" timestamp="1579378671337">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="1259" height="178" key="GridCell.Tab.1.left/0.0.1280.800@0.0.1280.800" timestamp="1577993203037" />
-    <state width="1259" height="278" key="GridCell.Tab.1.left/0.23.1280.777@0.23.1280.777" timestamp="1578580352522" />
-    <state width="1259" height="278" key="GridCell.Tab.1.right" timestamp="1578580352522">
+    <state width="1259" height="238" key="GridCell.Tab.1.left/0.23.1280.777@0.23.1280.777" timestamp="1579378671337" />
+    <state width="1259" height="238" key="GridCell.Tab.1.right" timestamp="1579378671338">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="1259" height="178" key="GridCell.Tab.1.right/0.0.1280.800@0.0.1280.800" timestamp="1577993203039" />
-    <state width="1259" height="278" key="GridCell.Tab.1.right/0.23.1280.777@0.23.1280.777" timestamp="1578580352522" />
+    <state width="1259" height="238" key="GridCell.Tab.1.right/0.23.1280.777@0.23.1280.777" timestamp="1579378671338" />
     <state x="111" y="78" key="SettingsEditor" timestamp="1578692140620">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="111" y="78" key="SettingsEditor/0.23.1280.777@0.23.1280.777" timestamp="1578692140620" />
-    <state x="305" y="143" width="670" height="657" key="search.everywhere.popup" timestamp="1578146561577">
+    <state x="423" y="335" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1578774610648">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="423" y="335" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1280.777@0.23.1280.777" timestamp="1578774610648" />
+    <state x="305" y="143" width="670" height="657" key="search.everywhere.popup" timestamp="1579101614815">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1577992507836" />
-    <state x="305" y="143" width="670" height="657" key="search.everywhere.popup/0.23.1280.777@0.23.1280.777" timestamp="1578146561577" />
+    <state x="305" y="143" width="670" height="657" key="search.everywhere.popup/0.23.1280.777@0.23.1280.777" timestamp="1579101614815" />
   </component>
 </project>
