@@ -1,5 +1,7 @@
 import numpy as np
 import scipy.linalg
+from scipy.stats import multivariate_normal
+from RSM import RsmSampler
 
 
 class MHSampler:
@@ -30,7 +32,7 @@ class MHSampler:
         if self.f is not None and (not np.all(self.f@x + self.g >= 0)):
             return 0
         else:
-            return (x - self.mu).dot(scipy.linalg.solve(self.Sigma, x - self.mu))
+            return np.exp(-0.5*(x - self.mu).dot(scipy.linalg.solve(self.Sigma, x - self.mu)))
 
     def q(self, y, x):
         """
@@ -40,7 +42,7 @@ class MHSampler:
         :param y: (m,)
         :param x: (m,) the previous state
         """
-        return (y - x).dot(scipy.linalg.solve(self.eta * self.Sigma, y - x))
+        return multivariate_normal.pdf(y, mean=x, cov=self.eta*self.Sigma)
 
     def next_state(self):
         """
@@ -48,7 +50,8 @@ class MHSampler:
         then accept the state according to an appropriate criterion
         """
         old_state = self.state
-        new_state = np.random.multivariate_normal(old_state, self.eta*self.Sigma)
+        rsm_sampler = RsmSampler(old_state, self.eta * self.Sigma, self.f, self.g)
+        new_state = rsm_sampler.rsm_tmg()
         r = np.minimum(1, self.p(new_state) / self.p(old_state))
         if np.random.uniform() >= r:
             new_state = old_state  # reject the candidate state
@@ -80,6 +83,7 @@ def mh(n, mu, Sigma, initial, f, g, eta, burn_in=30):
     mhs = MHSampler(mu, Sigma, initial, f, g, eta)
     for i in range(burn_in):
         mhs.next_state()
+
     for i in range(n):
         samples[i] = mhs.next_state()
     print("{} proposed states are rejected, while {} samples in total".format(mhs.reject, n+burn_in))
