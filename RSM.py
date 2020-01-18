@@ -17,6 +17,7 @@ class RsmSampler:
             valid = np.logical_and(g < np.inf, g > -np.inf)
             g = g[valid]
             f = f[valid]
+            self.mode = mu
         self.f = f
         self.g = g
         self.reject = 0
@@ -75,13 +76,13 @@ def rsm(n, mu, Sigma, f, g, verbose=False):
     :param verbose: print acceptance rate if true.
     """
 
-    rsmsampler = RsmSampler(mu, Sigma, f, g)
+    rsm_sampler = RsmSampler(mu, Sigma, f, g)
     dim = len(mu)
     samples = np.zeros((n, dim))
 
     for i in range(n):
-        samples[i] = rsmsampler.rsm_tmg()
+        samples[i] = rsm_sampler.rsm_tmg()
 
     if verbose:
-        print("Acceptance rate is {}".format(n / (n + rsmsampler.reject)))
+        print("Acceptance rate is {}".format(n / (n + rsm_sampler.reject)))
     return samples
