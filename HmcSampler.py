@@ -96,7 +96,7 @@ class HmcSampler:
         while True:
             velsign = 0
             # sample new initial velocity
-            a = np.random.multivariate_normal(np.zeros(dim), np.eye(dim))
+            a = np.random.normal(0, 1, dim)
 
             count_sample_vel += 1
             if self.verbose and count_sample_vel % 50 == 0:
@@ -104,17 +104,16 @@ class HmcSampler:
 
             tt = T  # the time left to move
             while True:
-                t = 0
-                if self.f is not None:
-                    t, c1 = self.getNextLinearHitTime(a, b)
-                # how much time to move, if t == 0, move tt
+                t, c1 = self.getNextLinearHitTime(a, b)
+                # t: how much time to move to hit the boundary, if t == 0, move tt
+                # c1: the strict constraint at hit time
 
                 if t == 0 or tt < t:
                     # if no wall to be hit (t == 0) or not enough
                     # time left to hit the wall (tt < t)
                     break
 
-                tt = tt - t  # time left to move after hitting the wall
+                tt -= t  # time left to move after hitting the wall
                 new_b = np.sin(t) * a + np.cos(t) * b  # hit location
                 hit_vel = np.cos(t) * a - np.sin(t) * b  # hit velocity
                 b = new_b
@@ -150,7 +149,7 @@ def tmg(n, mu, M, initial, f=None, g=None, burn_in=30, verbose=False):
     """
     This function generates samples from a Markov chain whose equilibrium distribution is a d-dimensional
     multivariate Gaussian truncated by linear inequalities. The probability log density is
-    log p(X) = - 0.5 (X-mu)^T M^-1 (X-mu) + const
+    log p(X) = -0.5 (X-mu)^T M^-1 (X-mu) + const
     in terms of a covariance matrix M and a mean vector mu. The constraints are imposed as explained below.
     The Markov chain is built using the Hamiltonian Monte Carlo technique.
 
@@ -176,7 +175,8 @@ def tmg(n, mu, M, initial, f=None, g=None, burn_in=30, verbose=False):
         raise ValueError("Wrong length for initial value vector.")
 
     # verify that M is positive definite, it will raise an error if M is not SPD
-    R = scipy.linalg.cholesky(M)  # R@R.T = M
+    # R = scipy.linalg.cholesky(M)  # R@R.T = M
+    R = np.linalg.cholesky(M)
 
     # we change variable to the canonical frame, and transform back after sampling
     # X ~ N(mu, M), then R^-1(X-mu) ~ N(0, I)
@@ -203,8 +203,6 @@ def tmg(n, mu, M, initial, f=None, g=None, burn_in=30, verbose=False):
     else:
         hmc = HmcSampler(dim, init_trans, f, g, verbose=verbose)
 
-    # print(f_trans@init_trans+g_trans)
-
     samples = np.zeros((n, dim))
     for i in range(burn_in):
         if verbose:
@@ -214,6 +212,8 @@ def tmg(n, mu, M, initial, f=None, g=None, burn_in=30, verbose=False):
         if verbose:
             print("=" * 30 + " sample {} ".format(i) + "=" * 30)
         samples[i] = hmc.sampleNext()
+
+    print("||M-RR^T||_F={}".format(np.linalg.norm(M-R@R.T, ord='fro')))
 
     # transform back
     return samples @ R.T + mu
