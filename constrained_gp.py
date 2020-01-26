@@ -3,14 +3,15 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy
-import scipy.stats
 from scipy.stats import norm
+import scipy.stats
 
 from GibbsSampler import gibbs
 from HmcSampler import tmg
 from MHSampler import mh
 from RSM import rsm
 from rtmg import py_rtmg
+from utility import title
 
 
 class ConstrainedGP:
@@ -170,7 +171,7 @@ class ConstrainedGP:
             l[m - 1] = constraints['bounded'][0]
             l[m] = -np.inf
 
-            u = np.full(m+1, np.inf)
+            u = np.full(m + 1, np.inf)
             u[m] = constraints['bounded'][1]
         else:
             pass
@@ -339,21 +340,21 @@ class ConstrainedGP:
             if alpha is not None:
                 R = R + alpha * np.eye(len(R))
 
-            eta = Lambda@initial  # new initial value, constraints: eta >= l, eta <= u,
+            eta = Lambda @ initial  # new initial value, constraints: eta >= l, eta <= u,
             # however the constraints may not be satisfied due to numerical issue
             eta[eta < l] = l[eta < l] + 1e-8
             eta[eta > u] = u[eta > u] - 1e-8
 
             if method == 'HMC':
-                samples = tmg(n, Lambda@mu, R, eta, f, g, burn_in=burn_in, verbose=verbose)
+                samples = tmg(n, Lambda @ mu, R, eta, f, g, burn_in=burn_in, verbose=verbose)
             elif method == 'RHMC':
-                samples = py_rtmg(n, Lambda@mu, R, eta, f, g, burn_in=burn_in, verbose=verbose)
+                samples = py_rtmg(n, Lambda @ mu, R, eta, f, g, burn_in=burn_in, verbose=verbose)
             elif method == 'RSM':
-                samples = rsm(n, Lambda@mu, R, f, g, verbose=verbose)
+                samples = rsm(n, Lambda @ mu, R, f, g, verbose=verbose)
             elif method == 'MH':
-                samples = mh(n, Lambda@mu, R, eta, f, g, 0.1, burn_in=burn_in)
+                samples = mh(n, Lambda @ mu, R, eta, f, g, 0.1, burn_in=burn_in)
             elif method == 'Gibbs':
-                samples = gibbs(n, Lambda@mu, R, eta, f, g, burn_in=burn_in)
+                samples = gibbs(n, Lambda @ mu, R, eta, f, g, burn_in=burn_in)
             else:
                 raise ValueError("Not supported method.")
             samples = np.linalg.solve(Lambda.T @ Lambda, Lambda.T) @ samples.T
@@ -392,68 +393,18 @@ class ConstrainedGP:
         self.var = np.var(y_sample, axis=1)
         return self.mean
 
-    # def var(self, xtest):
-    #     """
-    #     the conditional variance at xtest
-    #     """
-    #     assert self.samples is not None, "Has not fit yet."
-    #     coeff_phi = [self.basis_fun(xtest, j + 1) for j in range(self.m)]  # (m,k)
-    #     coeff_phi = np.array(coeff_phi).T  # (k, m)
-    #     y_sample = coeff_phi@self.samples.T   # (k, n)
-    #     self.var = np.var(y_sample, axis = 1)
-    #     return self.var
-
     def confidence_interval(self, confidence=0.9):
         assert self.mean is not None and self.var is not None, "Need to have mean and var first."
         n = self.samples.shape[0]
-        # se = np.sqrt(self.var)
         h = np.sqrt(self.var) * scipy.stats.t.ppf((1 + confidence) / 2., n - 1)
         return self.mean - h, self.mean + h
 
-    # def mean_var(self, xtest):
-    #     """
-    #     more efficient joint calculation
-    #     xtest is (n,d)
-    #     """
 
-
-def condition_num(const, x, alpha=None):
-    print("{} {} {} {} {} {} {} {}".format("  m", "rank_Gamma", "cond_Gamma", "PSD_sigma", "rank_sigma", "cond_sigma",
-                                           "PSD_Rinv", "cond_Rinv"))
-    for m in range(10, 105, 5):
-        Gp = ConstrainedGP(m, constraints=const)
-        Gamma = Gp.covariance()
-        if alpha is not None:
-            Gamma = Gamma + alpha * np.eye(len(Gamma))
-        Phi = Gp.interpolation_constraints(x)
-        l, Lambda, u = Gp.inequality_constraints()
-        Sigma = Gamma - Gamma @ Phi.T @ np.linalg.solve(Phi@Gamma@Phi.T, Phi, assume_a='sym') @ Gamma
-        if alpha is not None:
-            Sigma = Sigma + alpha * np.eye(len(Sigma))
-
-        R = Lambda@Sigma@Lambda.T
-
-        if alpha is not None:
-            R = R + alpha * np.eye(len(R))
-        Rinv = np.linalg.inv(R)
-
-        cond_Gamma = np.linalg.cond(Gamma)
-        rank_Gamma = np.linalg.matrix_rank(Gamma)
-        cond_Sigma = np.linalg.cond(Sigma)
-        rank_Sigma = np.linalg.matrix_rank(Sigma)
-        PSD_Sigma = np.all(np.linalg.eigvals(Sigma) > 0)
-        cond_Rinv = np.linalg.cond(Rinv)
-        PSD_Rinv = np.all(np.linalg.eigvals(Rinv) > 0)
-        print("%3d %5d      %5.4E %5d       %5d    %5.4E %4d     %5.4E"
-              % (m, rank_Gamma, cond_Gamma, PSD_Sigma, rank_Sigma, cond_Sigma, PSD_Rinv, cond_Rinv))
-
-
-def plot_mode(m):
+def plot_fig2(m, method, n, burn_in):
     const = [{'increasing': False, 'bounded': [], 'convex': False},
              {'increasing': False, 'bounded': [0, 1], 'convex': False},
              {'increasing': True, 'bounded': [], 'convex': False},
              {'increasing': True, 'bounded': [0, 1], 'convex': False}]
-    const_type = ["Unconstrained", "Boundedness", "Monotonicity", "Boundedness and monotonicity"]
 
     rv = norm()
 
@@ -462,90 +413,36 @@ def plot_mode(m):
 
     x_train = np.array([0.25, 0.5, 0.75])
     y_train = f(x_train)
-
     t = np.arange(0, 1 + 0.01, 0.01)
     y_true = f(t)
 
     fig, axs = plt.subplots(2, 2)
     for i in range(4):
         Gp = ConstrainedGP(m, constraints=const[i])
-        a, b, mode = Gp.mode(x_train, y_train, alpha=0.0001)
+        Gp.fit_gp(x_train, y_train, n=n, burn_in=burn_in, alpha=0.0000001,
+                  verbose=False, method=method)
+        Gp.mean_var(t)
 
-        def f_mode(x):
-            return Gp.interpolate(mode, x)
-
-        y_mode = f_mode(t)
+        y_pred = Gp.mean
+        ci_l, ci_u = Gp.confidence_interval()
 
         axs[i // 2, i % 2].plot(t, y_true, 'r', label="true function")
-        axs[i // 2, i % 2].plot(t, y_mode, 'b', label="mode")
+        axs[i // 2, i % 2].plot(t, y_pred, 'b', label="sample")
+        axs[i // 2, i % 2].fill_between(t, ci_l, ci_u, color='lightgrey')
         axs[i // 2, i % 2].plot(x_train, y_train, 'ko', label="training points")
+        axs[i // 2, i % 2].set_xlim(0., 1.)
+        axs[i // 2, i % 2].set_ylim(0., 1.)
+        axs[i // 2, i % 2].set_xlabel('x')
+        axs[i // 2, i % 2].set_ylabel('y(x)')
         axs[i // 2, i % 2].legend(loc='upper left')
-        axs[i // 2, i % 2].set_title(const_type[i])
+        axs[i // 2, i % 2].set_title(title(const[i]) + ', method: ' + method)
 
     plt.show()
-
-
-def title(constraint):
-    increasing = constraint['increasing']
-    convex = constraint['convex']
-    bounded = len(constraint['bounded']) > 0
-
-    if increasing and not convex and not bounded:
-        title = 'Monotonicity'
-    elif increasing and not convex and bounded:
-        title = 'Monotonicity and boundedness'
-    elif increasing and convex and not bounded:
-        title = 'Monotonicity and convexity'
-    elif increasing and convex and bounded:
-        title = 'Monotonicity, boundedness and convexity'
-    elif not increasing and not convex and bounded:
-        title = 'Boundedness'
-    elif not increasing and convex and not bounded:
-        title = 'Convexity'
-    elif not increasing and convex and bounded:
-        title = 'Convexity and boundedness'
-    else:
-        title = 'Unconstrained'
-    return title
 
 
 if __name__ == "__main__":
-    # plot_mode(100)
     constraint = {'increasing': True, 'bounded': [0, 1], 'convex': False}
-    sampling_method = 'Gibbs'
-    # condition_num(constraint, np.array([0.25, 0.5, 0.75]), 0.0000001)
+    sampling_method = 'HMC'
 
-    Gp = ConstrainedGP(30, constraints=constraint)
-    rv = norm()
-
-    def f(x):
-        return rv.cdf((x - 0.5) / 0.2)
-    x_train = np.array([0.25, 0.5, 0.75])
-    # def f(x):
-    #     return x*x
-    # x_train = np.array([0.1, 0.5, 0.9])
-    y_train = f(x_train)
-    samples = Gp.fit_gp(x_train, y_train, n=100, burn_in=100, alpha=0.0000001,
-                        verbose=False, method=sampling_method)
-
-    t = np.arange(0, 1 + 0.01, 0.01)
-    y_true = f(t)
-
-    Gp.mean_var(t)
-
-    y_pred = Gp.mean
-    ci_l, ci_u = Gp.confidence_interval()
-
-    fig, axis = plt.subplots()
-    axis.plot(t, y_true, 'r', label="true function")
-    axis.plot(t, y_pred, 'b', label="sample")
-    axis.fill_between(t, ci_l, ci_u, color='lightgrey')
-    axis.plot(x_train, y_train, 'ko', label="training points")
-    axis.set_xlim(0., 1.)
-    axis.set_ylim(0., 1.)
-    axis.set_xlabel('x')
-    axis.set_ylabel('y(x)')
-    axis.legend(loc='upper left')
-    axis.set_title(title(constraint)+',method: ' + sampling_method)
-
-    plt.show()
+    # plot_fig(30, constraint, sampling_method, 100, 100)
+    plot_fig2(30, sampling_method, 100, 100)
