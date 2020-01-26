@@ -213,7 +213,5 @@ def tmg(n, mu, M, initial, f=None, g=None, burn_in=30, verbose=False):
             print("=" * 30 + " sample {} ".format(i) + "=" * 30)
         samples[i] = hmc.sampleNext()
 
-    print("||M-RR^T||_F={}".format(np.linalg.norm(M-R@R.T, ord='fro')))
-
     # transform back
     return samples @ R.T + mu
