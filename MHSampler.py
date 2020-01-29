@@ -86,5 +86,5 @@ def mh(n, mu, Sigma, initial, f, g, eta, burn_in=30):
 
     for i in range(n):
         samples[i] = mhs.next_state()
-    print("{} proposed states are rejected, while {} samples in total".format(mhs.reject, n+burn_in))
+    # print("{} proposed states are rejected, while {} samples in total".format(mhs.reject, n+burn_in))
     return samples
