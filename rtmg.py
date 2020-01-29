@@ -16,7 +16,7 @@ def np2r(x):
     return xr
 
 
-def py_rtmg(n, mu, Sigma, initial, f=None, g=None, burn_in=30, verbose=False):
+def py_rtmg(n, mu, Sigma, initial, f=None, g=None, burn_in=30):
     """
     This function generates samples from a Markov chain whose equilibrium distribution is a d-dimensional
     multivariate Gaussian truncated by linear inequalities. The probability log density is
@@ -66,18 +66,3 @@ def py_rtmg(n, mu, Sigma, initial, f=None, g=None, burn_in=30, verbose=False):
         res = np.array(tmg.rtmg(n, M, r, initial, f, g, burn_in=burn_in))
 
     return res
-
-
-if __name__ == "__main__":
-    M = np.array([[0.5, -0.4], [-0.4, 0.5]])
-    n = 40
-    r = robjects.FloatVector((0, 0))
-
-    initial = np.array([4, 1])
-    f = np.array([[1, 1], [0, 1]])
-    g = np.array([0, 0])
-    burn_in = 30
-
-    # res = py_rtmg(n, M, r, initial, f, g, burn_in)
-    res = py_rtmg(n, M, r, initial, burn_in=10)
-    print(res)
