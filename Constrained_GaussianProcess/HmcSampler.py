@@ -1,3 +1,8 @@
+# Python implementation of "Exact Hamiltonian Monte Carlo for Truncated Multivariate Gaussian"
+# this script is written based on https://cran.r-project.org/web/packages/tmg/index.html
+
+# Author: Liaowang Huang <liahuang@student.ethz.ch>
+
 import numpy as np
 import scipy.linalg
 
@@ -175,7 +180,6 @@ def tmg(n, mu, M, initial, f=None, g=None, burn_in=30, verbose=False):
         raise ValueError("Wrong length for initial value vector.")
 
     # verify that M is positive definite, it will raise an error if M is not SPD
-    # R = scipy.linalg.cholesky(M)  # R@R.T = M
     R = np.linalg.cholesky(M)
 
     # we change variable to the canonical frame, and transform back after sampling

@@ -1,3 +1,9 @@
+# Sampling a truncated multivariate Gaussian by Rejection sampling from Mode
+# ("A New Rejection Sampling Method for Truncated Multivariate Gaussian Random Variables
+#   Restricted to Convex Sets" https://hal.archives-ouvertes.fr/hal-01063978/document)
+
+# Author: Liaowang Huang <liahuang@student.ethz.ch>
+
 import numpy as np
 import cvxpy as cp
 

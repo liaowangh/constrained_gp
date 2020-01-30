@@ -1,3 +1,8 @@
+# Sampling a truncated multivariate Gaussian by Metropolis-Hastings
+
+# Author: Liaowang Huang <liahuang@student.ethz.ch>
+
+
 import numpy as np
 import scipy.linalg
 from scipy.stats import multivariate_normal

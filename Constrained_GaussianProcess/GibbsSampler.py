@@ -1,9 +1,10 @@
-import numpy as np
-import scipy.linalg
-
 # Gibbs sampling for truncated multivariate normal X~N(0,I) with constraints fX+g>=0
 # suppose X=[X1,...Xn]', f=[f1,...fn]
 # Then Xj|X-j ~ N(0,1) with constraints fj*Xj + f-j*X-j + g >= 0
+
+# Author: Liaowang Huang <liahuang@student.ethz.ch>
+
+import numpy as np
 
 
 def truncated_gaussian(f, g):
