@@ -153,7 +153,7 @@ class HmcSampler:
 def tmg(n, mu, M, initial, f=None, g=None, burn_in=30, verbose=False):
     """
     This function generates samples from a Markov chain whose equilibrium distribution is a d-dimensional
-    multivariate Gaussian truncated by linear inequalities. The probability log density is
+    multivariate Gaussian truncated by linear inequalities. The log probability density is
     log p(X) = -0.5 (X-mu)^T M^-1 (X-mu) + const
     in terms of a covariance matrix M and a mean vector mu. The constraints are imposed as explained below.
     The Markov chain is built using the Hamiltonian Monte Carlo technique.

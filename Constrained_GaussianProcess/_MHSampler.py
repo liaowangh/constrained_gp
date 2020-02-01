@@ -6,7 +6,7 @@
 import numpy as np
 import scipy.linalg
 from scipy.stats import multivariate_normal
-from RSM import RsmSampler
+from ._RSM import RsmSampler
 
 
 class MHSampler:

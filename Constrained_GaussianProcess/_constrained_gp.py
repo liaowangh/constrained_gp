@@ -5,21 +5,16 @@
 
 import cvxpy as cp
 import math
-import matplotlib.pyplot as plt
 import numpy as np
 import scipy
 from scipy.stats import norm
 import scipy.stats
 
-import matplotlib.cm as cm
-from matplotlib.ticker import LinearLocator, FormatStrFormatter
-
-from GibbsSampler import gibbs
-from HmcSampler import tmg
-from MHSampler import mh
-from RSM import rsm
-from rtmg import py_rtmg
-from utility import title
+from ._HmcSampler import tmg
+from ._GibbsSampler import gibbs
+from ._MHSampler import mh
+from ._RSM import rsm
+from ._rtmg import py_rtmg
 
 
 class ConstrainedGP:
@@ -36,8 +31,7 @@ class ConstrainedGP:
         alpha:       scale, default to be 0.0000001, coefficient of diagonal shift to ensure numerical stability.
         basis:       string, specify the basis function, now only spikes (hat functions) are supported.
         samples:     (n,m), drawing from truncated multivariate Gaussian(tmg) after feeding the training data.
-        mean:        the mean of tmg at test data
-        var:         the variance of tmg at test data
+        predict:     predicted value computed by samples
 
     function object:
         k(x,y):                       the covariance(kernel) function, now only SE covariance is used,
@@ -92,8 +86,7 @@ class ConstrainedGP:
         self.alpha = alpha
         self.basis = basis
         self.samples = None
-        self.mean = None
-        self.var = None
+        self.predict = None
 
     def k(self, x, y):
         """
@@ -130,6 +123,10 @@ class ConstrainedGP:
         increasing = constraints['increasing']
         convex = constraints['convex']
         bounded = len(constraints['bounded']) > 0
+
+        if self.dim == 2 and (convex or (increasing and bounded)):
+            raise ValueError("In 2 dimension, only monotonicity or boundedness constraint is possible.")
+
         l = None
         Lambda = None
         u = None
@@ -146,10 +143,10 @@ class ConstrainedGP:
             else:
                 m1 = m[0]
                 m2 = m[1]
-                total_con = m2*(m1-1) + m1*(m2-1)
-                # total_con = 2*(m2-1)*(m1-1)
+                total_con = m2*(m1-1) + m1*(m2-1) + 1
                 l = np.full(total_con, -np.inf)
                 u = np.zeros(total_con)
+                u[-1] = np.inf
 
                 Lambda = []
                 for i in range(m1):
@@ -164,6 +161,9 @@ class ConstrainedGP:
                         tmp[i*m2+j] = 1
                         tmp[(i+1)*m2+j] = -1
                         Lambda.append(tmp)
+                tmp = np.zeros(m1*m2)
+                tmp[m1-1] = 1
+                Lambda.append(tmp)
                 Lambda = np.array(Lambda)
 
         elif not increasing and bounded and not convex:
@@ -356,8 +356,8 @@ class ConstrainedGP:
         Phi = self.interpolation_constraints(x)
         Gamma = self.covariance()
         Gamma = Gamma + self.alpha * np.eye(len(Gamma))
-        mu = Gamma @ Phi.T @ np.linalg.solve(Phi @ Gamma @ Phi.T, y)
-        Sigma = Gamma - Gamma @ Phi.T @ np.linalg.solve(Phi @ Gamma @ Phi.T, Phi) @ Gamma
+        mu = Gamma@Phi.T@np.linalg.solve(Phi@Gamma@Phi.T, y)
+        Sigma = Gamma - Gamma@Phi.T@np.linalg.solve(Phi@Gamma@Phi.T, Phi)@Gamma
         Sigma = Sigma + self.alpha * np.eye(len(Sigma))
 
         if Lambda is None:
@@ -430,18 +430,18 @@ class ConstrainedGP:
             eta[eta > u] = u[eta > u] - 1e-8
 
             if method == 'HMC':
-                samples = tmg(n, Lambda @ mu, R, eta, f, g, burn_in=burn_in)
+                samples = tmg(n, Lambda@mu, R, eta, f, g, burn_in=burn_in)
             elif method == 'RHMC':
-                samples = py_rtmg(n, Lambda @ mu, R, eta, f, g, burn_in=burn_in)
+                samples = py_rtmg(n, Lambda@mu, R, eta, f, g, burn_in=burn_in)
             elif method == 'RSM':
-                samples = rsm(n, Lambda @ mu, R, f, g)
+                samples = rsm(n, Lambda@mu, R, f, g)
             elif method == 'MH':
-                samples = mh(n, Lambda @ mu, R, eta, f, g, 0.1, burn_in=burn_in)
+                samples = mh(n, Lambda@mu, R, eta, f, g, 0.1, burn_in=burn_in)
             elif method == 'Gibbs':
-                samples = gibbs(n, Lambda @ mu, R, eta, f, g, burn_in=burn_in)
+                samples = gibbs(n, Lambda@mu, R, eta, f, g, burn_in=burn_in)
             else:
                 raise ValueError("Not supported method.")
-            samples = np.linalg.solve(Lambda.T @ Lambda, Lambda.T) @ samples.T
+            samples = np.linalg.solve(Lambda.T@Lambda, Lambda.T)@samples.T
             samples = samples.T
         else:
             # we have analytic formulation of the posterior distribution
@@ -459,7 +459,7 @@ class ConstrainedGP:
                 raise ValueError("Not supported method.")
         # print(samples)
         self.samples = samples
-        return samples
+        # return samples
 
     def mean(self, x_test):
         """
@@ -473,161 +473,28 @@ class ConstrainedGP:
             coeff_phi = [self.basis_fun(x_test, j + 1) for j in range(self.m)]  # (m,k)
             coeff_phi = np.array(coeff_phi).T  # (k, m)
         else:
-            n = len(x_test)
+            k = len(x_test)
             phi_1 = np.array([self.basis_fun(x_test[:, 0], j) for j in range(1, self.m[0] + 1)]).T
             phi_2 = np.array([self.basis_fun(x_test[:, 1], j) for j in range(1, self.m[1] + 1)]).T
-            coeff_phi = [np.kron(phi_1[i], phi_2[i]) for i in range(n)]
+            coeff_phi = [np.kron(phi_1[i], phi_2[i]) for i in range(k)]
             coeff_phi = np.array(coeff_phi)
-        y_sample = coeff_phi @ self.samples.T  # (k, n)
-        self.mean = np.mean(y_sample, axis=1)
-        self.var = np.var(y_sample, axis=1)
-        return self.mean
+        self.predict = coeff_phi @ self.samples.T   #(k,n)
+        # self.mean = np.mean(y_sample, axis=1)
+        # self.var = np.var(y_sample, axis=1)
+        return np.mean(self.predict, axis=1)
 
     def var(self):
         """
         the conditional variance after computing mean for test data
         :return:
         """
-        if self.var is not None:
-            return self.var
+        if self.predict is not None:
+            return np.var(self.predict, axis=1)
         else:
             raise ValueError("mean() must be called first.")
 
     def confidence_interval(self, confidence=0.9):
-        assert self.mean is not None and self.var is not None, "Need to have mean and var first."
-        n = self.samples.shape[0]
-        h = np.sqrt(self.var) * scipy.stats.t.ppf((1 + confidence) / 2., n - 1)
-        return self.mean - h, self.mean + h
-
-
-def plot_fig2(m, method, n, burn_in):
-    const = [{'increasing': False, 'bounded': [], 'convex': False},
-             {'increasing': False, 'bounded': [0, 1], 'convex': False},
-             {'increasing': True, 'bounded': [], 'convex': False},
-             {'increasing': True, 'bounded': [0, 1], 'convex': False}]
-
-    rv = norm()
-
-    def f(x):
-        return rv.cdf((x - 0.5) / 0.2)
-
-    x_train = np.array([0.25, 0.5, 0.75])
-    y_train = f(x_train)
-    t = np.arange(0, 1 + 0.01, 0.01)
-    y_true = f(t)
-
-    fig, axs = plt.subplots(2, 2)
-    for i in range(4):
-        Gp = ConstrainedGP(m, constraints=const[i])
-        Gp.fit_gp(x_train, y_train, n=n, burn_in=burn_in, method=method)
-        Gp.mean_var(t)
-
-        y_pred = Gp.mean
-        ci_l, ci_u = Gp.confidence_interval()
-
-        axs[i // 2, i % 2].plot(t, y_true, 'r', label="true function")
-        axs[i // 2, i % 2].plot(t, y_pred, 'b', label="sample")
-        axs[i // 2, i % 2].fill_between(t, ci_l, ci_u, color='lightgrey')
-        axs[i // 2, i % 2].plot(x_train, y_train, 'ko', label="training points")
-        axs[i // 2, i % 2].set_xlim(0., 1.)
-        axs[i // 2, i % 2].set_ylim(0., 1.)
-        axs[i // 2, i % 2].set_xlabel('x')
-        axs[i // 2, i % 2].set_ylabel('y(x)')
-        axs[i // 2, i % 2].legend(loc='upper left')
-        axs[i // 2, i % 2].set_title(title(const[i]) + ', method: ' + method)
-
-    plt.show()
-
-
-def plot_fig(m, constraint, interval, method, n, burn_in):
-    Gp = ConstrainedGP(m, constraints=constraint, interval=interval, alpha=0.0001)
-
-    # def f(x1, x2):
-    #     return -0.5*(np.sin(9*x1)-np.cos(9*x2))
-    def f(x1, x2):
-        return np.arctan(5*x1)+np.arctan(x2)
-
-    x = np.arange(0, 1.1, 0.2)
-    y = np.arange(0, 1.1, 0.2)
-    x, y = np.meshgrid(x, y)
-    x_train = np.array([x.flatten(), y.flatten()]).T
-    z_train = f(x, y)
-
-    Gp.fit_gp(x_train, z_train.flatten(), n=n, burn_in=burn_in, method=method)
-
-    t = np.arange(0, 1, 0.01)
-    t1, t2 = np.meshgrid(t, t)
-    x_test = np.array([t1.flatten(), t2.flatten()]).T
-    z_true = f(t1, t2)
-
-    Gp.mean_var(x_test)
-
-    z_pred = Gp.mean
-    z_pred = z_pred.reshape((100, 100))
-    fig = plt.figure()
-    ax = fig.gca(projection='3d')
-
-    ax.plot_surface(t1, t2, z_pred, cmap=cm.coolwarm, linewidth=0, antialiased=False)
-
-    ax.set_zlim(-0.1, np.pi - 1)
-    ax.zaxis.set_major_locator(LinearLocator(10))
-    ax.zaxis.set_major_formatter(FormatStrFormatter('%.02f'))
-
-    ax.scatter(x, y, z_train)
-
-    ax.set_xlabel('x1')
-    ax.set_ylabel('x2')
-    ax.set_zlabel('y(x1,x2)')
-
-    plt.show()
-
-
-def condition_num(const, alpha=0.0001):
-    print("{} {} {} {} {} {} {} {}".format("  m", "rank_Gamma", "cond_Gamma", "PSD_sigma", "rank_sigma", "cond_sigma",
-                                           "PSD_Rinv", "cond_Rinv"))
-    x = np.arange(0, 1, 0.25)
-    y = np.arange(0, 1, 0.25)
-    x, y = np.meshgrid(x, y)
-    x = np.array([x.flatten(), y.flatten()]).T
-
-    for m in range(4, 13, 1):
-        Gp = ConstrainedGP([m, m], constraints=const)
-        Gamma = Gp.covariance()
-        if alpha is not None:
-            Gamma = Gamma + alpha * np.eye(len(Gamma))
-        Phi = Gp.interpolation_constraints(x)
-        l, Lambda, u = Gp.inequality_constraints()
-        Sigma = Gamma - Gamma @ Phi.T @ np.linalg.solve(Phi @ Gamma @ Phi.T, Phi) @ Gamma
-        if alpha is not None:
-            Sigma = Sigma + alpha * np.eye(len(Sigma))
-
-        R = Lambda @ Sigma @ Lambda.T
-
-        if alpha is not None:
-            R = R + alpha * np.eye(len(R))
-        Rinv = np.linalg.inv(R)
-
-        cond_Gamma = np.linalg.cond(Gamma)
-        rank_Gamma = np.linalg.matrix_rank(Gamma)
-        cond_Sigma = np.linalg.cond(Sigma)
-        rank_Sigma = np.linalg.matrix_rank(Sigma)
-        PSD_Sigma = np.all(np.linalg.eigvals(Sigma) > 0)
-        cond_Rinv = np.linalg.cond(Rinv)
-        PSD_Rinv = np.all(np.linalg.eigvals(Rinv) > 0)
-        print("%3d %5d      %5.4E %5d       %5d    %5.4E %4d     %5.4E"
-              % (m, rank_Gamma, cond_Gamma, PSD_Sigma, rank_Sigma, cond_Sigma, PSD_Rinv, cond_Rinv))
-
-
-if __name__ == "__main__":
-    constraint = {'increasing': True, 'bounded': [], 'convex': False}
-    sampling_method = 'HMC'
-
-    # plot_fig(30, constraint, sampling_method, 100, 100)
-    plot_fig2(30, sampling_method, 100, 100)
-
-    # m = [5, 5]
-    # interval = [[0, 1], [0, 1]]
-    # Gp = ConstrainedGP(m, constraint, interval)
-    # plot_fig(m, constraint, interval, sampling_method, 50, 50)
-
-
+        assert self.predict is not None, "Need to call mean() first."
+        n = self.predict.shape[0]
+        h = np.sqrt(self.var()) * scipy.stats.t.ppf((1 + confidence) / 2., n - 1)
+        return np.mean(self.predict, axis=1) - h, np.mean(self.predict, axis=1) + h
