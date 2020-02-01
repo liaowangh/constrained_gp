@@ -57,7 +57,7 @@ y_pred = Gp.mean(x_test)  # get the conditional mean
 
 
 
-Sampling from $X\sim N(\mu, \Sigma)$ with constraints $f\cdot X+g\geq 0$
+Sampling from <img src="https://render.githubusercontent.com/render/math?math=X\sim \mathcal{N}(\mu, \Sigma)"> with constraints <img src="https://render.githubusercontent.com/render/math?math=f\cdot X+g\geq 0">
 
 ```python
 from Constrained_GaussianProcess import tmg
