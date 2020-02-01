@@ -56,6 +56,7 @@ y_pred = Gp.mean(x_test)  # get the conditional mean
 ```
 
 
+![X\sim \mathcal{N}(\mu, \Sigma)](https://render.githubusercontent.com/render/math?math=X%5Csim%20%5Cmathcal%7BN%7D(%5Cmu%2C%20%5CSigma))
 
 Sampling from <img src="https://render.githubusercontent.com/render/math?math=X\sim \mathcal{N}(\mu, \Sigma)"> with constraints <img src="https://render.githubusercontent.com/render/math?math=f\cdot X+g\geq 0">
 
