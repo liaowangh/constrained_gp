@@ -2,7 +2,7 @@
 
 Constrained_GaussianProcess is able to deal with linear inequality constraints in Gaussian Process frameworks. Check out the paper [Finite-Dimensional Gaussian Approximation with Linear Inequality Constraints](https://epubs.siam.org/doi/pdf/10.1137/17M1153157) for a detail explanation.
 
-![A toy example](/Users/hlw/Desktop/demo/constraineded_gp/HMC.png)
+![A toy example](HMC.png)
 
 There are also [Hamiltonian Monte Carlo](https://arxiv.org/abs/1208.4118) method and Gibbs sampling method to sample from truncated multivariate Gaussian.
 
