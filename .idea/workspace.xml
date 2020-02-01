@@ -3,14 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="ee35febc-92dd-486b-917d-31c77aa8bfaf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GibbsSampler.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HmcSampler.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MHSampler.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSM.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/constrained_gp.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rtmg.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utility.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/constrained_gp-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/constrained_gp-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Constrained_GaussianProcess/GibbsSampler.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Constrained_GaussianProcess/HmcSampler.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Constrained_GaussianProcess/MHSampler.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Constrained_GaussianProcess/RSM.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Constrained_GaussianProcess/constrained_gp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Constrained_GaussianProcess/rtmg.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Constrained_GaussianProcess/utility.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebook/constrained_gp.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebook/constrained_gp.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,12 +40,13 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
-  <component name="RunManager" selected="Python.constrained_gp (2)">
-    <configuration name="HmcSampler" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.test">
+    <configuration name="_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="constraineded_gp" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -51,32 +54,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Constrained_GaussianProcess" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/HmcSampler.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="constrained_gp (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="constraineded_gp" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/constrained_gp.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Constrained_GaussianProcess/_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -106,7 +88,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="constrained_gp" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="test (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="constraineded_gp" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -118,7 +100,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/constrained_gp.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -127,7 +109,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="new_problem" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="constraineded_gp" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -135,11 +117,32 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../TA/NPDECODES-master/scripts" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Constrained_GaussianProcess" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../TA/NPDECODES-master/scripts/new_problem.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Constrained_GaussianProcess/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="utility" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="constraineded_gp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Constrained_GaussianProcess" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Constrained_GaussianProcess/utility.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -150,11 +153,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.test (1)" />
+        <item itemvalue="Python._test" />
+        <item itemvalue="Python.utility" />
         <item itemvalue="Python.constrained_gp (2)" />
-        <item itemvalue="Python.constrained_gp (1)" />
-        <item itemvalue="Python.constrained_gp" />
-        <item itemvalue="Python.HmcSampler" />
-        <item itemvalue="Python.new_problem" />
       </list>
     </recent_temporary>
   </component>
@@ -196,50 +199,50 @@
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state x="263" y="23" key="CommitChangelistDialog2/0.23.1280.777@0.23.1280.777" timestamp="1579099124821" />
-    <state width="1259" height="79" key="GridCell.Tab.0.bottom" timestamp="1580333495193">
+    <state width="1259" height="124" key="GridCell.Tab.0.bottom" timestamp="1580515754557">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="1259" height="165" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1577993553826" />
     <state width="1259" height="245" key="GridCell.Tab.0.bottom/0.23.1280.777/-203.-1057.1920.1057@0.23.1280.777" timestamp="1580137313834" />
-    <state width="1259" height="79" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1580333495193" />
-    <state width="1259" height="79" key="GridCell.Tab.0.center" timestamp="1580333495192">
+    <state width="1259" height="124" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1580515754557" />
+    <state width="1259" height="124" key="GridCell.Tab.0.center" timestamp="1580515754555">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="1259" height="165" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1577993553824" />
     <state width="1259" height="245" key="GridCell.Tab.0.center/0.23.1280.777/-203.-1057.1920.1057@0.23.1280.777" timestamp="1580137313833" />
-    <state width="1259" height="79" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1580333495192" />
-    <state width="1259" height="79" key="GridCell.Tab.0.left" timestamp="1580333495191">
+    <state width="1259" height="124" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1580515754555" />
+    <state width="1259" height="124" key="GridCell.Tab.0.left" timestamp="1580515754555">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="1259" height="165" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1577993553823" />
     <state width="1259" height="245" key="GridCell.Tab.0.left/0.23.1280.777/-203.-1057.1920.1057@0.23.1280.777" timestamp="1580137313832" />
-    <state width="1259" height="79" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1580333495191" />
-    <state width="1259" height="79" key="GridCell.Tab.0.right" timestamp="1580333495193">
+    <state width="1259" height="124" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1580515754555" />
+    <state width="1259" height="124" key="GridCell.Tab.0.right" timestamp="1580515754556">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="1259" height="165" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1577993553825" />
     <state width="1259" height="245" key="GridCell.Tab.0.right/0.23.1280.777/-203.-1057.1920.1057@0.23.1280.777" timestamp="1580137313833" />
-    <state width="1259" height="79" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1580333495193" />
-    <state width="1259" height="133" key="GridCell.Tab.1.bottom" timestamp="1580316271399">
+    <state width="1259" height="124" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1580515754556" />
+    <state width="1259" height="245" key="GridCell.Tab.1.bottom" timestamp="1580485841995">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="1259" height="178" key="GridCell.Tab.1.bottom/0.0.1280.800@0.0.1280.800" timestamp="1577993203040" />
-    <state width="1259" height="133" key="GridCell.Tab.1.bottom/0.23.1280.777@0.23.1280.777" timestamp="1580316271399" />
-    <state width="1259" height="133" key="GridCell.Tab.1.center" timestamp="1580316271399">
+    <state width="1259" height="245" key="GridCell.Tab.1.bottom/0.23.1280.777@0.23.1280.777" timestamp="1580485841995" />
+    <state width="1259" height="245" key="GridCell.Tab.1.center" timestamp="1580485841994">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="1259" height="178" key="GridCell.Tab.1.center/0.0.1280.800@0.0.1280.800" timestamp="1577993203038" />
-    <state width="1259" height="133" key="GridCell.Tab.1.center/0.23.1280.777@0.23.1280.777" timestamp="1580316271399" />
-    <state width="1259" height="133" key="GridCell.Tab.1.left" timestamp="1580316271399">
+    <state width="1259" height="245" key="GridCell.Tab.1.center/0.23.1280.777@0.23.1280.777" timestamp="1580485841994" />
+    <state width="1259" height="245" key="GridCell.Tab.1.left" timestamp="1580485841994">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="1259" height="178" key="GridCell.Tab.1.left/0.0.1280.800@0.0.1280.800" timestamp="1577993203037" />
-    <state width="1259" height="133" key="GridCell.Tab.1.left/0.23.1280.777@0.23.1280.777" timestamp="1580316271399" />
-    <state width="1259" height="133" key="GridCell.Tab.1.right" timestamp="1580316271399">
+    <state width="1259" height="245" key="GridCell.Tab.1.left/0.23.1280.777@0.23.1280.777" timestamp="1580485841994" />
+    <state width="1259" height="245" key="GridCell.Tab.1.right" timestamp="1580485841994">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
     <state width="1259" height="178" key="GridCell.Tab.1.right/0.0.1280.800@0.0.1280.800" timestamp="1577993203039" />
-    <state width="1259" height="133" key="GridCell.Tab.1.right/0.23.1280.777@0.23.1280.777" timestamp="1580316271399" />
+    <state width="1259" height="245" key="GridCell.Tab.1.right/0.23.1280.777@0.23.1280.777" timestamp="1580485841994" />
     <state x="111" y="78" key="SettingsEditor" timestamp="1580333116150">
       <screen x="0" y="23" width="1280" height="777" />
     </state>
